@@ -161,7 +161,7 @@ class Tetris {
 
 let repeatAt = 0;
 export default {
-  id: 'tetris', title: 'Tetris', checkpoint: 'english', keys: '← → MOVE · ↑ TURN · SPACE DROP',
+  id: 'tetris', title: 'Tetris', checkpoint: 'english', keys: '← → MOVE · ↑ TURN · ↓ / SPACE DROP',
   blurb: 'Every spot the piece could land in is described in a sentence and Laya is asked how the stack would look. The piece goes where P(clean) was highest, and gravity does not wait for the answer.',
   params: [],
   input(keys, pressed) {   // a held arrow repeats after 170 ms, then every 45 ms; up arrives as Space too, so tell them apart

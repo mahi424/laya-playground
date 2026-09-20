@@ -9,6 +9,8 @@ import { Stage } from './dither.js';
 import { STEP, MAX_RATE, answersFrom } from './sim.js';
 import { h, bar, predict } from './ui.js';
 
+const TOUCH_ONLY = matchMedia('(hover: none) and (pointer: coarse)').matches;   // a phone or tablet with no keyboard
+
 const TONES = ['#0c0c0c', '#ffc609'];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -32,6 +34,7 @@ class GameStage {
     const el = this.el = {}, d = this.demo, dd = k => (el[k] = h('dd', {}, '—'));
     const pick = (values, on) => { const box = h('div', { class: 'seg', role: 'group' });
       box.append(...values.map(([v, label], i) => h('button', { class: i ? '' : 'on', onclick: e => { for (const b of box.children) b.classList.toggle('on', b === e.target); on(v); } }, label))); return box; };
+    const canPlay = d.touch || !TOUCH_ONLY;   // a keyboard game on a phone: do not offer a control that cannot work
     el.canvas = h('canvas', { class: 'pixelated', tabindex: 0, 'aria-label': d.title + ' game stage', onpointerdown: () => { if (this.pilot === 'you') pressed.add('pointer'); } });
     el.score = h('b', {}, '0000'); el.best = h('b', {}, '0000'); el.crashes = h('b', {}, '000'); el.msg = h('span');
     el.pause = h('button', { onclick: () => { this.paused = !this.paused; } });
@@ -41,7 +44,7 @@ class GameStage {
         h('div', { class: 'stage' }, el.canvas, el.banner,
           h('div', { class: 'hud' }, h('span', {}, 'SCORE ', el.score), h('span', {}, 'BEST ', el.best), h('span', { class: 'sp' }), h('span', {}, 'CRASHES ', el.crashes)),
           h('div', { class: 'stage-msg' }, el.msg)),
-        h('div', { class: 'controls' }, pick([['laya', 'LAYA PLAYS'], ['you', 'YOU PLAY']], v => { this.pilot = v; el.canvas.focus({ preventScroll: true }); }), el.pause, h('span', { class: 'keys' }, d.keys))),
+        h('div', { class: 'controls' }, canPlay && pick([['laya', 'LAYA PLAYS'], ['you', 'YOU PLAY']], v => { this.pilot = v; el.canvas.focus({ preventScroll: true }); }), el.pause, h('span', { class: 'keys' }, canPlay ? d.keys : 'PLAY IT YOURSELF ON A KEYBOARD'))),
       h('dl', { class: 'feed' },
         h('dt', {}, 'SOURCE'), dd('source'), h('dt', {}, 'STATE SENT'), dd('state'), h('dt', {}, 'QUESTION'), dd('question'),
         h('dt', {}, 'ANSWER'), dd('bars'), h('dt', {}, 'ACTION'), dd('action'), h('dt', {}, 'TIMING'), dd('timing')));
@@ -102,8 +105,9 @@ class GameStage {
     if (active && !this.paused && playable) {
       this.acc += dt;
       const input = this.mode === 'you' ? this.demo.input(keys, pressed) : {};
-      while (this.acc >= STEP) { this.tick(input); this.acc -= STEP; for (const k in input) input[k] = false; }
-      pressed.clear();
+      let stepped = false;
+      while (this.acc >= STEP) { this.tick(input); this.acc -= STEP; stepped = true; for (const k in input) input[k] = false; }
+      if (stepped) pressed.clear();   // a frame with no step (displays faster than the timestep) keeps the press for the next one
     }
     if (!active && this.drawn) return;   // off-stage: keep the last frame, but never leave the canvas blank
     this.drawn = true;
@@ -137,7 +141,7 @@ class GameStage {
     const { el, run } = this;
     el.source.textContent = this.mode === 'live' ? `live model · ${this.demo.checkpoint} checkpoint`
       : this.mode === 'you' ? 'you are playing · the model is idle'
-      : run ? `recorded run · ${run.machine} ·\u00a0${run.recorded}` : '—';
+      : run ? `recorded run · ${run.machine} ·\u00a0${run.recorded.replace(/-/g, '\u2011')}` : '—';
     if (!this.feed) { for (const k of ['state', 'question', 'action', 'timing']) el[k].textContent = '—'; return el.bars.replaceChildren(); }
     const { obs, answers, action } = this.feed, [qid, q] = Object.entries(obs.questions)[0], a = answers[qid];
     el.state.textContent = typeof obs.state === 'string' ? obs.state : JSON.stringify(obs.state);
@@ -158,6 +162,7 @@ addEventListener('keydown', e => {
   keys.add(e.code);
 });
 addEventListener('keyup', e => keys.delete(e.code));
+addEventListener('blur', () => { keys.clear(); pressed.clear(); });   // a key held while switching apps would otherwise stay held
 
 // ------------------------------------------------------------------ one loop for every stage; only the most visible one runs
 let last = performance.now();

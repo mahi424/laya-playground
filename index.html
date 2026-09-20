@@ -149,7 +149,7 @@
    "name": "Does it ever lose?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Yes. Every cleared line makes the pieces fall faster. At around 28 rows a second a piece lands before every spot has been read, and the stack tips over. Live on a laptop, one life lasted about 97 seconds and 83 lines."
+    "text": "Yes. Every cleared line makes the pieces fall faster. At around 28 rows a second a piece lands before every spot has been read, and the stack tips over. Live on a laptop, a life lasts about 95 to 120 seconds and 75 to 100 lines."
    }
   },
   {
@@ -235,7 +235,7 @@
   </div>
   <div id="versusTable"></div>
   <p class="fine" id="versusNote"></p>
-  <table class="tbl">
+  <div class="tbl-wrap"><table class="tbl">
     <colgroup><col class="edge"><col class="mid"><col class="mid"><col class="edge"></colgroup>
     <thead><tr><th></th><th class="us">Laya</th><th>TypeSafe Jev</th><th>An LLM</th></tr></thead>
     <tbody>
@@ -245,7 +245,7 @@
       <tr><th>Your data goes</th><td class="us">Nowhere</td><td>To a vendor</td><td>To a vendor</td></tr>
       <tr><th>Price</th><td class="us">Free</td><td>Per token</td><td>Per token</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <div class="qa">
     <div><h3>Is Jev open source? Can I run it locally?</h3>
       <p>No. Jev is TypeSafe AI’s hosted System One model: closed weights, API only, early access. Laya does the same job, typed questions in and probabilities out, with open weights you run yourself.</p></div>
@@ -296,7 +296,7 @@
     <div><h3>How does a classifier play Tetris?</h3>
       <p>Code lists the landing spots and does the counting. Laya reads one sentence per distinct spot, such as <code>The piece leaves one hole under it and makes a small bump on top</code>, and returns P(clean). In the recorded minute that was 1,799 decisions and 52 cleared lines with no top-out. Nothing is scripted and bad answers get played.</p></div>
     <div><h3>Does it ever lose?</h3>
-      <p>Yes. Every cleared line makes the pieces fall faster. At around 28 rows a second a piece lands before every spot has been read, and the stack tips over. Live on a laptop, one life lasted about 97 seconds and 83 lines.</p></div>
+      <p>Yes. Every cleared line makes the pieces fall faster. At around 28 rows a second a piece lands before every spot has been read, and the stack tips over. Live on a laptop, a life lasts about 95 to 120 seconds and 75 to 100 lines.</p></div>
   </div>
 </section>
 

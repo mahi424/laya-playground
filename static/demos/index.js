@@ -5,6 +5,7 @@
 //   checkpoint                  the Laya checkpoint that handles this demo's phrasing best
 //   params                      [{ id, label, min, max, step, value }] sliders passed to act()
 //   input(keys, pressed)        map held keys / keys pressed this frame to the demo's own input object
+//   touch                       true when input() also reads pressed.has('pointer'), so a phone can play it
 //   create()                    returns an instance with:
 //       score, best, crashes, dead            numbers read by the HUD (dead > 0 while crashed)
 //       update(dt, input)                     advance the simulation; never waits for the model

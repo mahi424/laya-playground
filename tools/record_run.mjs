@@ -25,6 +25,8 @@ async function predict(body) {
 const health = await (await fetch(API + '/api/health')).json();
 mkdirSync(OUT, { recursive: true });
 
+if (process.env.ONLY && !demos.some(d => process.env.ONLY.split(',').includes(d.id))) throw new Error(`ONLY=${process.env.ONLY} matches no demo (have: ${demos.map(d => d.id).join(', ')})`);
+
 for (const demo of demos) {
   if (process.env.ONLY && !process.env.ONLY.split(',').includes(demo.id)) continue;   // ONLY=tetris leaves the other recordings alone
   if (health.models[demo.checkpoint] !== 'ready') throw new Error(`${demo.checkpoint} checkpoint is not loaded yet`);

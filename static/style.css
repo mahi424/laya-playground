@@ -157,7 +157,7 @@ section.block.first, .index + section.block, .seam + section.block, .legend + se
 .tbl .win { font-weight: 700; }
 .tbl.bench td, .tbl.bench thead tr + tr th { text-align: right; white-space: nowrap; }
 .tbl.bench thead tr:first-child th { text-align: center; } .tbl.bench thead tr:first-child th:first-child { text-align: left; }
-#versusTable { overflow-x: auto; }
+#versusTable, .tbl-wrap { overflow-x: auto; }   /* a table may be wider than a phone, but only inside its own box */
 #versusNote { margin-bottom: var(--s3); }
 @media (min-width: 1001px) {
   .tbl { table-layout: fixed; }
@@ -165,7 +165,7 @@ section.block.first, .index + section.block, .seam + section.block, .legend + se
   .tbl col.edge, .tbl col.mid { width: 25%; }
   .tbl col.edge-half, .tbl col.mid-half { width: 12.5%; }
 }
-@media (max-width: 1000px) { .tbl.bench { min-width: 640px; } }
+@media (max-width: 1000px) { .tbl.bench { min-width: 640px; } .tbl-wrap .tbl { min-width: 560px; } }
 @media (max-width: 640px) { .tbl th, .tbl td { padding: 8px; } }
 
 /* ------------------------------------------------------------------ controls */
@@ -195,6 +195,10 @@ label { display: block; margin: 18px 0 6px; color: var(--faint); }
 .banner { max-width: 90ch; margin: 0 0 var(--s2); color: var(--dim); }
 .stage .banner { position: absolute; right: 12px; bottom: 12px; max-width: min(calc(100% - 24px), 46ch); margin: 0; padding: 6px 10px; background: var(--ink); text-align: right; pointer-events: none; }
 .stage .banner a { pointer-events: auto; }   /* the plate lets clicks through to the game; its link takes them */
+/* Tetris keeps its well left of centre: a narrower plate wraps over sky and ground and never over the stack */
+@media (min-width: 721px) { [data-demo="tetris"] .stage .banner { max-width: calc(42% - 12px); } }
+/* on a phone the stage is small: the plate would hide half the game, so it sits under the canvas instead */
+@media (max-width: 720px) { .stage .banner { position: static; max-width: none; padding: var(--s1) 0 0; background: none; text-align: left; } }
 .banner.live { display: block; color: var(--amber); }   /* `.live` is also the game grid: without this the live banner becomes 12 columns */
 .banner:empty { display: none; }
 .note { margin: 0; padding: 10px 12px; background: var(--amber); color: var(--ink); }

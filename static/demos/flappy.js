@@ -93,6 +93,7 @@ export default {
   id: 'flappy', title: 'Flappy', checkpoint: 'english', keys: 'SPACE / CLICK TO FLAP',
   blurb: 'Each tick the bird’s height is put into words and Laya is asked where the bird is. The game flaps when P(below) clears the threshold.',
   params: [{ id: 'threshold', label: 'FLAP WHEN P(BELOW) >', min: 0.05, max: 0.95, step: 0.05, value: 0.5 }],
+  touch: true,
   input: (keys, pressed) => ({ flap: pressed.has('Space') || pressed.has('pointer') }),
   create: seed => new Flappy(seed),
 };
