@@ -1,0 +1,130 @@
+laya 0.3.4 | torch 2.14.0 | mps=True
+loaded ['english', 'multilingual', 'typed-decisions'] in 92.5s on mps
+==============================================================================
+1. English email triage (auto-routed)
+  routed to : english  (English Latin text)
+  tokens in : 348   tokens out: 0
+  department         -> billing      conf=0.86
+      billing        #######################. 0.965
+      technical      ........................ 0.014
+      other          ........................ 0.011
+      sales          ........................ 0.010
+  urgency            -> 1.44 / 2   conf=0.14
+      0 not urgent                           ###..................... 0.116
+      1 soon                                 ########................ 0.327
+      2 critical deadline or blocking issue  #############........... 0.556
+  churn_risk         -> P(true)=0.825 ####################....
+  refund_requested   -> P(true)=0.843 ####################....
+==============================================================================
+2a. Polish, auto-routed (misdetected as English)
+  routed to : english  (English Latin text)
+  tokens in : 424   tokens out: 0
+  department         -> technical    conf=0.39
+      technical      #################....... 0.716
+      billing        ####.................... 0.183
+      sales          #....................... 0.057
+      other          #....................... 0.044
+  urgency            -> 0.98 / 2   conf=0.05
+      0 not urgent                           ##########.............. 0.417
+      1 soon                                 ####.................... 0.188
+      2 critical deadline or blocking issue  #########............... 0.396
+  churn_risk         -> P(true)=0.288 #######.................
+  refund_requested   -> P(true)=0.822 ####################....
+==============================================================================
+2b. Polish, with explicit lang='pl'
+  routed to : multilingual  (explicit lang='pl')
+  tokens in : 340   tokens out: 0
+  department         -> technical    conf=0.97
+      technical      ######################## 0.995
+      sales          ........................ 0.003
+      other          ........................ 0.002
+      billing        ........................ 0.001
+  urgency            -> 1.85 / 2   conf=0.61
+      0 not urgent                           ........................ 0.003
+      1 soon                                 ###..................... 0.142
+      2 critical deadline or blocking issue  #####################... 0.856
+  churn_risk         -> P(true)=0.014 ........................
+  refund_requested   -> P(true)=0.000 ........................
+==============================================================================
+3. Hindi (auto-routed)
+  routed to : multilingual  (non-Latin script (devanagari, 100% of letters); the English checkpoint cannot read it)
+  tokens in : 236   tokens out: 0
+  department         -> billing      conf=0.97
+      billing        ######################## 0.994
+      other          ........................ 0.003
+      sales          ........................ 0.002
+      technical      ........................ 0.001
+  urgency            -> 1.74 / 2   conf=0.43
+      0 not urgent                           #....................... 0.027
+      1 soon                                 #####................... 0.202
+      2 critical deadline or blocking issue  ##################...... 0.770
+  churn_risk         -> P(true)=0.007 ........................
+  refund_requested   -> P(true)=0.994 ########################
+==============================================================================
+4. typed-decisions checkpoint, customer_service workflow
+  routed to : typed-decisions  (explicit model='typed-decisions')
+  tokens in : 342   tokens out: 0
+  category           -> technical    conf=0.44
+      technical      ##################...... 0.742
+      other          ###..................... 0.122
+      account        #....................... 0.056
+      billing        #....................... 0.041
+      shipping       #....................... 0.040
+  action             -> escalate     conf=0.22
+      escalate       ###############......... 0.611
+      reply          ####.................... 0.169
+      close          ###..................... 0.144
+      refund         ##...................... 0.076
+  urgency            -> 2.26 / 3   conf=0.23
+      0 low                                  ........................ 0.018
+      1 medium                               ###..................... 0.131
+      2 high                                 ##########.............. 0.423
+      3 critical                             ##########.............. 0.428
+  churn_risk         -> P(true)=0.678 ################........
+  needs_human        -> P(true)=0.652 ################........
+==============================================================================
+5. Guardrail preset on a prompt-injection attempt
+  routed to : english  (English Latin text)
+  tokens in : 323   tokens out: 0
+  jailbreak          -> P(true)=0.908 ######################..
+  prompt_injection   -> P(true)=0.940 #######################.
+  sensitive_data     -> P(true)=0.845 ####################....
+  harm_severity      -> 1.91 / 3   conf=0.13
+      0 none: ordinary request               ##...................... 0.100
+      1 minor: mildly inappropriate          ###..................... 0.144
+      2 serious: unsafe advice or abuse      ############............ 0.503
+      3 severe: dangerous or illegal         ######.................. 0.253
+  topic              -> security_testing conf=0.45
+      security_testing ##############.......... 0.597
+      coding         #######................. 0.311
+      product_support #....................... 0.045
+      personal_advice #....................... 0.040
+      other          ........................ 0.004
+      general_knowledge ........................ 0.003
+==============================================================================
+6. Same guardrail on a benign prompt
+  routed to : english  (English Latin text)
+  tokens in : 313   tokens out: 0
+  jailbreak          -> P(true)=0.354 ########................
+  prompt_injection   -> P(true)=0.167 ####....................
+  sensitive_data     -> P(true)=0.091 ##......................
+  harm_severity      -> 0.87 / 3   conf=0.19
+      0 none: ordinary request               ########................ 0.345
+      1 minor: mildly inappropriate          ###########............. 0.467
+      2 serious: unsafe advice or abuse      ####.................... 0.159
+      3 severe: dangerous or illegal         #....................... 0.029
+  topic              -> product_support conf=0.32
+      product_support ###########............. 0.476
+      personal_advice ########................ 0.326
+      coding         ###..................... 0.134
+      other          #....................... 0.034
+      general_knowledge #....................... 0.022
+      security_testing ........................ 0.009
+==============================================================================
+Latency, warm, median / p95 ms  (published: 39.5 ms EN, 32.8 ms ML on a Tesla T4)
+  checkpoint       dev          1 question       10 questions
+  english          mps      33.9 / 34.7       156.9 / 158.9    (15.7 ms/question batched)
+  multilingual     mps      20.8 / 21.8        72.1 / 78.1     (7.2 ms/question batched)
+  typed-decisions  mps      35.8 / 37.9       184.9 / 192.3    (18.5 ms/question batched)
+  english          cpu     139.2 / 184.7      538.7 / 580.7    (53.9 ms/question batched)
+  multilingual     cpu      58.4 / 71.0       236.3 / 261.9    (23.6 ms/question batched)

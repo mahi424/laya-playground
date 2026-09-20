@@ -1,0 +1,207 @@
+[
+  {
+    "id": "ag_news",
+    "title": "News topic",
+    "question_id": "topic",
+    "question": {
+      "type": "choice",
+      "instructions": "What is this news article about?",
+      "criteria": {
+        "world": "International affairs, politics, conflict or diplomacy.",
+        "sports": "Sports events, teams, athletes or results.",
+        "business": "Companies, markets, finance or the economy.",
+        "sci_tech": "Science, technology, computing or the internet."
+      }
+    },
+    "label_field": "choice: the option key (world, sports, business, sci_tech)",
+    "source": "AG News (fancyzhx/ag_news) https://huggingface.co/datasets/fancyzhx/ag_news",
+    "license": "not stated (dataset card: license 'unknown'; the card describes the corpus as provided for research purposes and non-commercial activity)",
+    "split": "test",
+    "n": 100,
+    "in_laya_training_data": true,
+    "in_laya_training_evidence": "\"| AG News | **0.947** | 0.937 | in training mix |\" (table 'English tasks', columns: task | laya | laya-multilingual | note) https://github.com/NandhaKishorM/laya (raw: https://raw.githubusercontent.com/NandhaKishorM/laya/main/README.md). The sources do not say which AG News split was in the training mix. AG News is also reported as a benchmark in https://raw.githubusercontent.com/NandhaKishorM/laya/main/BENCHMARKS.md and https://huggingface.co/convaiinnovations/laya.",
+    "hf_dataset": "fancyzhx/ag_news",
+    "hf_config": "default",
+    "label_distribution": {
+      "world": 25,
+      "sports": 25,
+      "business": 25,
+      "sci_tech": 25
+    },
+    "avg_chars": 249.9,
+    "filter_stats": {
+      "rows_fetched": 1500
+    }
+  },
+  {
+    "id": "sms_spam",
+    "title": "SMS spam",
+    "question_id": "is_spam",
+    "question": {
+      "type": "noul",
+      "instructions": "Is this SMS message spam?"
+    },
+    "label_field": "noul: true = spam, false = not spam (ham)",
+    "source": "SMS Spam Collection (ucirvine/sms_spam) https://huggingface.co/datasets/ucirvine/sms_spam",
+    "license": "not stated (dataset card: license 'unknown')",
+    "split": "train (the dataset's only split)",
+    "n": 100,
+    "in_laya_training_data": "unknown",
+    "in_laya_training_evidence": "not mentioned - none of the three sources names the SMS Spam Collection / ucirvine/sms_spam or SMS data at all. Nearest related statement concerns an unnamed EMAIL spam source, not SMS: \"| Email spam | **0.993** | 0.993 | 0.958 | in training |\" https://raw.githubusercontent.com/NandhaKishorM/laya/main/BENCHMARKS.md",
+    "hf_dataset": "ucirvine/sms_spam",
+    "hf_config": "plain_text",
+    "label_distribution": {
+      "false": 50,
+      "true": 50
+    },
+    "avg_chars": 104.5,
+    "filter_stats": {
+      "rows_fetched": 1974,
+      "dropped_duplicate": 69
+    }
+  },
+  {
+    "id": "emotion",
+    "title": "Emotion",
+    "question_id": "emotion",
+    "question": {
+      "type": "choice",
+      "instructions": "Which emotion does the writer of this message express?",
+      "criteria": {
+        "sadness": "Feeling sad, down, hurt or hopeless.",
+        "joy": "Feeling happy, pleased, content or excited.",
+        "love": "Feeling affection, caring, tenderness or longing for someone.",
+        "anger": "Feeling angry, irritated, resentful or frustrated.",
+        "fear": "Feeling afraid, anxious, nervous or worried.",
+        "surprise": "Feeling surprised, amazed, curious or caught off guard."
+      }
+    },
+    "label_field": "choice: the option key (sadness, joy, love, anger, fear, surprise)",
+    "source": "DAIR.AI Emotion (dair-ai/emotion, config 'split') https://huggingface.co/datasets/dair-ai/emotion",
+    "license": "other - dataset card: \"The dataset should be used for educational and research purposes only.\"",
+    "split": "test",
+    "n": 100,
+    "in_laya_training_data": false,
+    "in_laya_training_evidence": "\"| DAIR Emotion | **0.573** | 0.513 | held out |\" (table 'English tasks', columns: task | laya | laya-multilingual | note) https://github.com/NandhaKishorM/laya (raw: https://raw.githubusercontent.com/NandhaKishorM/laya/main/README.md); definition: \"*held out* means the source was **not** in Laya's training mix.\" https://raw.githubusercontent.com/NandhaKishorM/laya/main/BENCHMARKS.md. Used by Laya's authors as a held-out benchmark (also reported in https://huggingface.co/convaiinnovations/laya).",
+    "hf_dataset": "dair-ai/emotion",
+    "hf_config": "split",
+    "label_distribution": {
+      "sadness": 16,
+      "joy": 17,
+      "love": 17,
+      "anger": 16,
+      "fear": 17,
+      "surprise": 17
+    },
+    "avg_chars": 94.4,
+    "filter_stats": {
+      "rows_fetched": 2000
+    }
+  },
+  {
+    "id": "review_stars",
+    "title": "Review star rating",
+    "question_id": "stars",
+    "question": {
+      "type": "score",
+      "instructions": "How many stars did the reviewer give in this review?",
+      "criteria": [
+        "1 star: very negative, a bad experience.",
+        "2 stars: mostly negative, with few redeeming points.",
+        "3 stars: mixed or average.",
+        "4 stars: mostly positive, with minor complaints.",
+        "5 stars: very positive, an excellent experience."
+      ]
+    },
+    "label_field": "score: integer level index starting at 0 (0 = 1 star ... 4 = 5 stars)",
+    "source": "Yelp Review Full (Yelp/yelp_review_full) https://huggingface.co/datasets/Yelp/yelp_review_full",
+    "license": "other - Yelp Dataset Agreement (dataset card: license_details 'yelp-licence')",
+    "split": "test",
+    "n": 100,
+    "in_laya_training_data": "unknown",
+    "in_laya_training_evidence": "not mentioned",
+    "hf_dataset": "Yelp/yelp_review_full",
+    "hf_config": "yelp_review_full",
+    "label_distribution": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "3": 20,
+      "4": 20
+    },
+    "avg_chars": 507.6,
+    "filter_stats": {
+      "rows_fetched": 2000,
+      "dropped_too_long": 345
+    }
+  },
+  {
+    "id": "prompt_injection",
+    "title": "Prompt injection",
+    "question_id": "is_injection",
+    "question": {
+      "type": "noul",
+      "instructions": "Is this prompt an injection or jailbreak attempt?"
+    },
+    "label_field": "noul: true = injection / jailbreak attempt, false = legitimate prompt",
+    "source": "deepset prompt-injections (deepset/prompt-injections) https://huggingface.co/datasets/deepset/prompt-injections",
+    "license": "apache-2.0",
+    "split": "test (61 examples) + train (39 examples, top-up)",
+    "n": 100,
+    "in_laya_training_data": false,
+    "in_laya_training_evidence": "\"| prompt-injections | **0.698** | 0.578 | held out, n=116 |\" (table 'English tasks', columns: task | laya | laya-multilingual | note) https://github.com/NandhaKishorM/laya (raw: https://raw.githubusercontent.com/NandhaKishorM/laya/main/README.md); \"(deepset prompt-injections measured 0.698 separately)\" and \"*held out* means the source was **not** in Laya's training mix.\" https://raw.githubusercontent.com/NandhaKishorM/laya/main/BENCHMARKS.md. n=116 equals the size of this dataset's test split, i.e. Laya's authors used it as a held-out benchmark.",
+    "hf_dataset": "deepset/prompt-injections",
+    "hf_config": "default",
+    "label_distribution": {
+      "false": 50,
+      "true": 50
+    },
+    "avg_chars": 101.0,
+    "filter_stats": {
+      "rows_fetched": 662,
+      "dropped_not_english": 316,
+      "dropped_too_long": 3
+    },
+    "ids_not_from_primary_split": [
+      3,
+      6,
+      9,
+      15,
+      16,
+      21,
+      25,
+      26,
+      31,
+      36,
+      38,
+      39,
+      40,
+      46,
+      48,
+      49,
+      51,
+      54,
+      57,
+      60,
+      61,
+      63,
+      66,
+      67,
+      68,
+      70,
+      73,
+      76,
+      80,
+      82,
+      83,
+      84,
+      90,
+      91,
+      92,
+      94,
+      95,
+      96,
+      98
+    ]
+  }
+]

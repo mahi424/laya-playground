@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Served at /laya (no trailing slash) relative URLs would resolve against the site root, so pin the base to this folder. -->
+<script>(function(){var p=location.pathname.replace(/index\.html$/,'');if(!/\/$/.test(p))p+='/';document.write('<base href="'+p+'">');})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laya: open-source alternative to TypeSafe Jev, runs locally</title>
+<meta name="description" content="Laya is an Apache-2.0 open-source alternative to TypeSafe's Jev that runs locally. Try the live demo, see measured benchmarks, get the free agent skill.">
+<meta name="author" content="brain function collapse">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://brainfunctioncollapse.com/laya">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="brainfunctioncollapse">
+<meta property="og:url" content="https://brainfunctioncollapse.com/laya">
+<meta property="og:title" content="Laya: open-source alternative to TypeSafe Jev, runs locally">
+<meta property="og:description" content="Typed decisions with real probabilities in 21 ms, on your own machine. Live demo, a real Laya vs Jev benchmark, and a free SKILL.md for coding agents.">
+<meta property="og:image" content="https://brainfunctioncollapse.com/laya/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Laya: open-source alternative to TypeSafe Jev, runs locally">
+<meta name="twitter:description" content="Typed decisions with real probabilities in 21 ms, on your own machine. Demo, benchmark and agent skill by brain function collapse.">
+<meta name="twitter:image" content="https://brainfunctioncollapse.com/laya/og.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="static/style.css">
+<script type="application/ld+json" id="ld">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": "https://brainfunctioncollapse.com/#bfc", "name": "brain function collapse",
+      "url": "https://brainfunctioncollapse.com", "logo": "https://brainfunctioncollapse.com/laya/static/bfc-mark.png",
+      "sameAs": ["https://x.com/brainFnCl", "https://www.threads.com/@brainfncl", "https://www.linkedin.com/in/wojciech-dobry"] },
+    { "@type": "Person", "@id": "https://github.com/NandhaKishorM", "name": "Nandakishor M",
+      "url": "https://github.com/NandhaKishorM", "affiliation": { "@id": "https://huggingface.co/convaiinnovations" } },
+    { "@type": "Organization", "@id": "https://huggingface.co/convaiinnovations", "name": "Convai Innovations", "url": "https://huggingface.co/convaiinnovations" },
+    { "@type": "WebSite", "@id": "https://brainfunctioncollapse.com/#site", "name": "brainfunctioncollapse", "url": "https://brainfunctioncollapse.com",
+      "publisher": { "@id": "https://brainfunctioncollapse.com/#bfc" } },
+    { "@type": "WebPage", "@id": "https://brainfunctioncollapse.com/laya", "url": "https://brainfunctioncollapse.com/laya",
+      "name": "Laya: open-source alternative to TypeSafe Jev, runs locally", "isPartOf": { "@id": "https://brainfunctioncollapse.com/#site" },
+      "author": { "@id": "https://brainfunctioncollapse.com/#bfc" }, "about": { "@id": "https://github.com/NandhaKishorM/laya" },
+      "primaryImageOfPage": "https://brainfunctioncollapse.com/laya/og.png", "inLanguage": "en" },
+    { "@type": "SoftwareApplication", "@id": "https://github.com/NandhaKishorM/laya", "name": "Laya",
+      "description": "Open-source, non-generative System 1 decision model: typed questions in, calibrated probabilities out, in a single forward pass.",
+      "applicationCategory": "DeveloperApplication", "operatingSystem": "macOS, Linux, Windows", "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "author": { "@id": "https://github.com/NandhaKishorM" }, "publisher": { "@id": "https://huggingface.co/convaiinnovations" },
+      "codeRepository": "https://github.com/NandhaKishorM/laya", "downloadUrl": "https://pypi.org/project/laya/",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "citation": { "@type": "ScholarlyArticle", "name": "SalesRLAgent: A Reinforcement Learning Approach for Real-Time Sales Conversion Prediction and Optimization",
+        "author": { "@id": "https://github.com/NandhaKishorM" }, "datePublished": "2025-03-30", "url": "https://arxiv.org/abs/2503.23303" } },
+    { "@type": "SoftwareSourceCode", "@id": "https://brainfunctioncollapse.com/laya#skill", "name": "laya-integration: SKILL.md for coding agents",
+      "description": "A free agent skill that teaches Claude Code and other coding agents to integrate the Laya decision model into any project.",
+      "url": "https://brainfunctioncollapse.com/laya#skill", "programmingLanguage": "Markdown", "runtimePlatform": "Claude Code",
+      "codeSampleType": "full solution", "downloadUrl": "https://brainfunctioncollapse.com/laya/skills/laya-integration/SKILL.md",
+      "author": { "@id": "https://brainfunctioncollapse.com/#bfc" }, "about": { "@id": "https://github.com/NandhaKishorM/laya" } },
+    { "@type": "WebApplication", "@id": "https://brainfunctioncollapse.com/laya#playground", "name": "Laya playground",
+      "description": "A playground for the Laya decision model with two live game demos, a typed-question editor and recorded runs.",
+      "url": "https://brainfunctioncollapse.com/laya/playground", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "creator": { "@id": "https://brainfunctioncollapse.com/#bfc" }, "isBasedOn": { "@id": "https://github.com/NandhaKishorM/laya" } },
+    { "@type": "Dataset", "@id": "https://brainfunctioncollapse.com/laya#benchmark", "name": "Laya vs TypeSafe Jev: 500-example typed-decision benchmark",
+      "description": "Accuracy, expected calibration error and median latency of the open-source Laya model and TypeSafe AI's hosted Jev API on the same 500 labelled examples across five tasks: news topic, SMS spam, emotion, review stars and prompt injection. Identical questions, no tuning.",
+      "url": "https://brainfunctioncollapse.com/laya#versus", "datePublished": "2026-09-20", "creator": { "@id": "https://brainfunctioncollapse.com/#bfc" },
+      "measurementTechnique": "Identical typed questions sent to both models; accuracy against dataset labels; ECE with 10 bins; median request latency.",
+      "variableMeasured": ["accuracy", "expected calibration error", "median latency"], "about": { "@id": "https://github.com/NandhaKishorM/laya" },
+      "distribution": { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://brainfunctioncollapse.com/laya/static/data/versus.json" } }
+  ]
+}
+</script>
+<script type="application/ld+json" id="ld-faq">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "@id": "https://brainfunctioncollapse.com/laya#faq",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Is Jev open source? Can I run it locally?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Jev is TypeSafe AI’s hosted System One model: closed weights, API only, early access. Laya does the same job, typed questions in and probabilities out, with open weights you run yourself."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which should I use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Jev if you want the best accuracy today and a hosted API is fine. Laya if the data cannot leave, latency matters, or you want to fine-tune on your own labels."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is Laya a clone of Jev?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Its author published the underlying work in March 2025, eighteen months before Jev launched. The story is here."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How is this different from a BERT classifier?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The question is set at request time. One System 1 model answers any typed question, with no training per task and no generated text to parse."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How does a classifier play a game?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The game writes its situation as a sentence, such as The bird is a little below the gap, and asks one typed question. Laya returns probabilities. The game flaps when P(below) passes one half. Nothing is scripted."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why ask what it sees, not what to do?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Asked which way to move, every checkpoint answered backwards. Asked where the bird is, it gave clean graded answers: P(below) of 0.95, 0.82, 0.06, 0.07, 0.02."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can it read numbers?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Given two altitudes, no checkpoint could tell which was lower. Do the arithmetic in code and hand Laya the conclusion in words."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does wording matter?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A lot. blocked by a barrier separated lanes by 0.75. blocked by a train managed 0.45. Try three phrasings and measure."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Where does it go wrong?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Auto-routing knows seven Latin-script languages, so Polish lands on the English checkpoint, which invents a refund request. A language hint fixes it. The multilingual checkpoint ships uncalibrated."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I trust the probabilities?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "More than an LLM saying it is confident. Fit a temperature on your own examples, pick thresholds from data, and send the unsure cases to a person."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which agents does it work with?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Claude Code reads .claude/skills natively. Any agent that accepts a markdown instruction file can use it as is. Then ask: route these support tickets without calling an LLM."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does it change?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Without it, agents reach for an LLM call and feed it raw numbers. With it, they load Laya once, ask what the text says, set thresholds from your data and report measured accuracy."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<!-- data-repo: the public repository this page sends people to. Change it in this one place. -->
+<body data-repo="https://github.com/wdobry/laya-playground">
+
+<div class="bar-top">
+  <a class="brand" href="https://brainfunctioncollapse.com"><img src="static/bfc-mark.png" alt="" width="128" height="128"><span>brain function collapse</span></a>
+  <nav>
+    <a href="./" aria-current="page">Laya</a><a href="playground">Playground</a><a href="about">About</a>
+  </nav>
+  <span class="tag" id="status"><i class="dot"></i>recorded preview</span>
+  <a class="btn solid" href="./#skill">Get the skill</a>
+</div>
+
+<section class="hero">
+  <h1>Decisions 200× faster than an LLM.</h1>
+  <div class="g12 hero-row">
+    <div class="hero-main">
+      <p class="lede">Laya is the open-source alternative to TypeSafe Jev: a small model that decides instead of chatting. Typed answers with real probabilities in 21 ms, on your own machine.</p>
+      <div class="cta">
+        <a class="btn solid" href="./#skill">Get the agent skill</a>
+        <a class="btn" data-repo-link href="#">Get the code</a>
+        <a class="btn" href="./#flappy">Watch it play</a>
+      </div>
+    </div>
+    <p class="fine">Model by <a href="https://github.com/NandhaKishorM">Nandakishor M</a>, Convai Innovations. Playground, benchmark and agent skill by <a href="about">brain function collapse</a>. 200× compares 21 ms measured on an Apple M1 Max with roughly 4 s for a hosted LLM to return the same structured answer. Time your&nbsp;own.</p>
+  </div>
+  <div class="stats">
+    <div><b>21 ms</b><span>per decision, on a laptop&nbsp;GPU</span></div>
+    <div><b>0</b><span>tokens generated,&nbsp;ever</span></div>
+    <div><b>322M</b><span>parameters. 650 MB on&nbsp;disk</span></div>
+    <div><b>$0</b><span>per call.&nbsp;<span class="nw">Apache-2.0</span></span></div>
+  </div>
+  <!-- HERO IMAGE SLOT: drop the artwork here, e.g. <img class="hero-art" src="static/hero.png" alt="…" width="…" height="…"> -->
+</section>
+<div class="seam"></div>
+
+<nav class="index" aria-label="On this page">
+  <a href="./#versus">Vs Jev</a><a href="./#flappy">Flappy</a><a href="./#runner">Runner</a><a href="./#compare">Compare</a><a href="./#use-cases">Use cases</a><a href="./#skill">Skill</a><a href="./#run-it">Run it</a>
+</nav>
+
+<section class="block" id="versus">
+  <div class="head">
+    <h2>Laya vs Jev, measured.</h2>
+    <div class="aside"><p class="lead">Same 500 examples, same questions, no tuning. Jev is more accurate out of the box. Laya matches it on simple questions, answers <span id="vsSpeed">several times</span> faster from this desk, and is yours to run and fine-tune.</p></div>
+  </div>
+  <div id="versusTable"></div>
+  <p class="fine" id="versusNote"></p>
+  <table class="tbl">
+    <colgroup><col class="edge"><col class="mid"><col class="mid"><col class="edge"></colgroup>
+    <thead><tr><th></th><th class="us">Laya</th><th>TypeSafe Jev</th><th>An LLM</th></tr></thead>
+    <tbody>
+      <tr><th>Open weights</th><td class="us">Yes, Apache-2.0</td><td>No</td><td>Rarely</td></tr>
+      <tr><th>Runs on your machine</th><td class="us">Yes, offline</td><td>No, hosted API</td><td>Rarely</td></tr>
+      <tr><th>What comes back</th><td class="us">Typed answers with probabilities</td><td>Typed answers with probabilities</td><td>Text you parse</td></tr>
+      <tr><th>Your data goes</th><td class="us">Nowhere</td><td>To a vendor</td><td>To a vendor</td></tr>
+      <tr><th>Price</th><td class="us">Free</td><td>Per token</td><td>Per token</td></tr>
+    </tbody>
+  </table>
+  <div class="qa">
+    <div><h3>Is Jev open source? Can I run it locally?</h3>
+      <p>No. Jev is TypeSafe AI’s hosted System One model: closed weights, API only, early access. Laya does the same job, typed questions in and probabilities out, with open weights you run yourself.</p></div>
+    <div><h3>Which should I use?</h3>
+      <p>Jev if you want the best accuracy today and a hosted API is fine. Laya if the data cannot leave, latency matters, or you want to fine-tune on your own labels.</p></div>
+    <div><h3>Is Laya a clone of Jev?</h3>
+      <p>No. Its author published the underlying work in March 2025, eighteen months before Jev launched. <a href="about">The story is here.</a></p></div>
+    <div><h3>How is this different from a BERT classifier?</h3>
+      <p>The question is set at request time. One System 1 model answers any typed question, with no training per task and no generated text to parse.</p></div>
+  </div>
+</section>
+
+<section class="block" id="flappy">
+  <div class="head">
+    <h2>Fast enough to play a game live.</h2>
+    <div class="aside"><p class="lead">An LLM hits the first pillar before it finishes thinking. Laya decides around 30 times a second, so it flies the bird itself.</p></div>
+  </div>
+  <div class="live game-mount" data-demo="flappy"></div>
+  <div class="qa">
+    <div><h3>How does a classifier play a game?</h3>
+      <p>The game writes its situation as a sentence, such as <code>The bird is a little below the gap</code>, and asks one typed question. Laya returns probabilities. The game flaps when P(below) passes one half. Nothing is scripted.</p></div>
+    <div><h3>Why ask what it sees, not what to do?</h3>
+      <p>Asked which way to move, every checkpoint answered backwards. Asked where the bird is, it gave clean graded answers: P(below) of 0.95, 0.82, 0.06, 0.07, 0.02.</p></div>
+  </div>
+</section>
+
+<section class="block" id="runner">
+  <div class="head">
+    <h2>Three lanes.<br>One sentence.<br>27 milliseconds.</h2>
+    <div class="aside"><p class="lead">The next row of barriers is described in plain English. Laya says which lane is empty. It keeps speeding up.</p></div>
+  </div>
+  <div class="live game-mount" data-demo="runner"></div>
+  <div class="qa">
+    <div><h3>Can it read numbers?</h3>
+      <p>No. Given two altitudes, no checkpoint could tell which was lower. Do the arithmetic in code and hand Laya the conclusion in words.</p></div>
+    <div><h3>Does wording matter?</h3>
+      <p>A lot. <code>blocked by a barrier</code> separated lanes by 0.75. <code>blocked by a train</code> managed 0.45. Try three phrasings and measure.</p></div>
+  </div>
+</section>
+
+<section class="block" id="compare">
+  <div class="head">
+    <h2>One email.<br>Five questions.<br>59 milliseconds.</h2>
+    <div class="aside">
+      <p class="lead">A phishing email, five typed questions at once, all three checkpoints, one forward pass each.</p>
+      <a class="btn solid" href="playground">Try your own text in the playground</a>
+    </div>
+  </div>
+  <div class="cols3 showcase-input" id="showcaseInput"></div>
+  <div class="cols3 results" id="showcase"></div>
+  <div class="qa">
+    <div><h3>Where does it go wrong?</h3>
+      <p>Auto-routing knows seven Latin-script languages, so Polish lands on the English checkpoint, which invents a refund request. A language hint fixes it. The multilingual checkpoint ships uncalibrated.</p></div>
+    <div><h3>Can I trust the probabilities?</h3>
+      <p>More than an LLM saying it is confident. Fit a temperature on your own examples, pick thresholds from data, and send the unsure cases to a person.</p></div>
+  </div>
+</section>
+
+<section class="block" id="use-cases">
+  <div class="head">
+    <h2>Where a decision model earns its place.</h2>
+    <div class="aside"><p class="lead">Anywhere software has to pick, check or grade a piece of text, thousands of times, quickly. Six patterns cover most of it.</p></div>
+  </div>
+  <div class="uc">
+    <article><div class="uc-viz" data-viz="route" data-label="Messages split from one stream into four queues"></div><h3>Route: send it to the right place.</h3>
+      <p>Support tickets, inbound email, which model should answer.</p>
+      <p class="ask"><code>choice</code> Which team should handle this?</p></article>
+    <article><div class="uc-viz" data-viz="guard" data-label="Prompts pass through a gate; injection attempts are stopped"></div><h3>Guard: stop it before it happens.</h3>
+      <p>A gate in front of an agent or an LLM: injections, unsafe tool calls, data leaks.</p>
+      <p class="ask"><code>noul</code> Is this prompt an injection attempt?</p></article>
+    <article><div class="uc-viz" data-viz="score" data-label="A probability distribution over five ordered levels"></div><h3>Score: put a number on it.</h3>
+      <p>Urgency, severity, lead quality, rubric grading. A distribution, not a guess.</p>
+      <p class="ask"><code>score</code> How urgent is this, from 0 to 4?</p></article>
+    <article><div class="uc-viz" data-viz="filter" data-label="A sweep across an inbox lights up the spam"></div><h3>Filter: clean the stream.</h3>
+      <p>Spam, phishing, moderation, or which retrieved passages are worth reading.</p>
+      <p class="ask"><code>noul</code> Is this message spam?</p></article>
+    <article><div class="uc-viz" data-viz="watch" data-label="Steps of an agent run are checked one by one; one is flagged"></div><h3>Watch: check every step an agent takes.</h3>
+      <p>Cheap enough to run on each action, so the risky one gets a human.</p>
+      <p class="ask"><code>noul</code> Does this step need review?</p></article>
+    <article><div class="uc-viz" data-viz="cascade" data-label="Confident decisions are acted on; uncertain ones go to an LLM or a person"></div><h3>Cascade: save the LLM for the hard ones.</h3>
+      <p>Act on the confident answers. Send only the unsure ones to something slower.</p>
+      <p class="ask"><code>confidence</code> Above the threshold? Act. Below? Escalate.</p></article>
+  </div>
+  <p class="fine">The diagrams are illustrations. Out of the box Laya is strongest at routing and yes/no checks; graded scores improve a lot with fine-tuning. See the benchmark above.</p>
+</section>
+
+<section class="block" id="skill">
+  <div class="head">
+    <h2>Give your coding agent a decision model.</h2>
+    <div class="aside"><p class="lead">One file teaches your agent to add Laya properly: the API, questions that work, thresholds, calibration, and the traps found building this page.</p></div>
+  </div>
+  <pre class="cmd" id="skillCmd">mkdir -p .claude/skills/laya-integration &amp;&amp; curl -fsSL https://brainfunctioncollapse.com/laya/skills/laya-integration/SKILL.md -o .claude/skills/laya-integration/SKILL.md</pre>
+  <p class="row"><button class="solid" data-copy="#skillCmd">Copy command</button><a class="btn" href="skills/laya-integration/SKILL.md" download="SKILL.md">Download SKILL.md</a><button data-copy="#skillDoc">Copy file</button></p>
+  <pre class="file" id="skillDoc" tabindex="0">Loading SKILL.md…</pre>
+  <div class="qa">
+    <div><h3>Which agents does it work with?</h3>
+      <p>Claude Code reads <code>.claude/skills</code> natively. Any agent that accepts a markdown instruction file can use it as is. Then ask: <code>route these support tickets without calling an LLM</code>.</p></div>
+    <div><h3>What does it change?</h3>
+      <p>Without it, agents reach for an LLM call and feed it raw numbers. With it, they load Laya once, ask what the text says, set thresholds from your data and report measured accuracy.</p></div>
+  </div>
+</section>
+
+<section class="block" id="run-it">
+  <div class="head">
+    <h2>Clone it. Run it.<br>Keep it.</h2>
+    <div class="aside"><p class="lead">The model server, both games, the benchmark and the recorder, in one repository. Apple silicon, NVIDIA or plain CPU.</p></div>
+  </div>
+  <pre class="cmd" data-repo-text>git clone {repo}
+cd {dir}
+uv venv --python 3.12 &amp;&amp; uv pip install laya
+.venv/bin/python server.py          # then open http://127.0.0.1:8770/playground</pre>
+  <p class="fine">The first start downloads 2.3 GB of open weights and takes about 90 seconds to load them.</p>
+</section>
+
+<div class="seam up"></div>
+<section class="band">
+  <h2>Your agent can add this today.</h2>
+  <div class="cta"><a class="btn solid" href="./#skill">Get the agent skill</a><a class="btn" href="about">Why this page exists</a></div>
+</section>
+<div class="seam"></div>
+
+<footer>
+  <div class="cols3">
+    <p><b>Laya</b> is created by <a href="https://github.com/NandhaKishorM">Nandakishor M</a> (Convai Innovations), Apache-2.0: <a href="https://github.com/NandhaKishorM/laya">code</a>, <a href="https://huggingface.co/convaiinnovations/laya">weights</a>, <a href="https://arxiv.org/abs/2503.23303">the original paper</a>, <a class="nw" href="https://arxiv.org/abs/2510.01237">the follow-up</a>.</p>
+    <p>This playground, the Laya vs Jev benchmark and the agent skill are by <a href="https://brainfunctioncollapse.com">brain function collapse</a>.&nbsp;<a data-repo-link href="#">Source</a>.</p>
+    <p>Not affiliated with or endorsed by TypeSafe AI. Jev is their product, named here only to&nbsp;compare.</p>
+  </div>
+</footer>
+
+<script type="module" src="static/nav.js"></script>
+<script type="module" src="static/app.js"></script>
+<script type="module" src="static/live.js"></script>
+<script type="module" src="static/usecases.js"></script>
+</body>
+</html>

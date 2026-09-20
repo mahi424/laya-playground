@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+*.key
+.DS_Store
+.claude/settings.local.json
+.claude/worktrees/
+
+# Benchmark: raw API responses and downloaded pages are never committed; the sampled texts are
+# rebuilt with eval/build_dataset.py because two source datasets restrict redistribution.
+eval/cache/
+eval/data/

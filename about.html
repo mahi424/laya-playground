@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Pin relative URLs to this folder whether the page is served as /laya/about or /laya/about.html. -->
+<script>document.write('<base href="'+location.pathname.replace(/[^\/]*$/,'')+'">');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Good research dies without marketing. About the Laya playground</title>
+<meta name="description" content="brain function collapse built the Laya playground, benchmark and agent skill on this site. The Laya model itself is by Nandakishor M of Convai Innovations.">
+<meta name="author" content="brain function collapse">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://brainfunctioncollapse.com/laya/about">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="brainfunctioncollapse">
+<meta property="og:url" content="https://brainfunctioncollapse.com/laya/about">
+<meta property="og:title" content="Good research dies without marketing.">
+<meta property="og:description" content="I wanted Jev and got a waitlist. Then I found the open-source model that came first. It was good and nobody was marketing it.">
+<meta property="og:image" content="https://brainfunctioncollapse.com/laya/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="static/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "AboutPage", "@id": "https://brainfunctioncollapse.com/laya/about", "url": "https://brainfunctioncollapse.com/laya/about",
+      "name": "Good research dies without marketing. About the Laya playground", "about": { "@id": "https://brainfunctioncollapse.com/#bfc" },
+      "isPartOf": { "@id": "https://brainfunctioncollapse.com/laya" }, "inLanguage": "en" },
+    { "@type": "Organization", "@id": "https://brainfunctioncollapse.com/#bfc", "name": "brain function collapse", "url": "https://brainfunctioncollapse.com",
+      "logo": "https://brainfunctioncollapse.com/laya/static/bfc-mark.png",
+      "description": "Creator of the Laya playground, the Laya vs Jev benchmark and the laya-integration agent skill.",
+      "sameAs": ["https://x.com/brainFnCl", "https://www.threads.com/@brainfncl", "https://www.linkedin.com/in/wojciech-dobry"] },
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "brain function collapse", "item": "https://brainfunctioncollapse.com" },
+      { "@type": "ListItem", "position": 2, "name": "Laya", "item": "https://brainfunctioncollapse.com/laya" },
+      { "@type": "ListItem", "position": 3, "name": "About", "item": "https://brainfunctioncollapse.com/laya/about" } ] }
+  ]
+}
+</script>
+</head>
+<body data-repo="https://github.com/wdobry/laya-playground">
+
+<div class="bar-top">
+  <a class="brand" href="https://brainfunctioncollapse.com"><img src="static/bfc-mark.png" alt="" width="128" height="128"><span>brain function collapse</span></a>
+  <nav>
+    <a href="./">Laya</a><a href="playground">Playground</a><a href="about" aria-current="page">About</a>
+  </nav>
+  <span class="tag" id="status"><i class="dot"></i>recorded preview</span>
+  <a class="btn solid" href="./#skill">Get the skill</a>
+</div>
+
+<section class="hero">
+  <h1>Good research dies without marketing.</h1>
+</section>
+<div class="seam"></div>
+
+<section class="block prose">
+  <div class="beats">
+    <p class="big">I wanted to try Jev, TypeSafe AI’s new System One model. I got a waitlist.</p>
+    <p class="big">While I waited, I found Laya. Open weights, a paper, a dataset, an Apache-2.0 licence, and an author who had been publishing this idea since March 2025. It ran on my laptop the same afternoon.</p>
+    <p class="big">The model was good. The marketing was a Reddit post. So this page is the marketing.</p>
+  </div>
+  <p>Later I got access to the Jev API and ran both models on the same 500 labelled examples. Jev is more accurate out of the box. Laya is faster from my desk, free, and open, so you can fine-tune it. The numbers are on <a href="./#versus">the main page</a> the way they fell.</p>
+</section>
+
+<section class="block prose">
+  <div class="head">
+    <h2>I did not build Laya.</h2>
+    <div class="aside"><p class="lead">If Laya is useful to you, <a href="https://github.com/NandhaKishorM">support its author</a>. He has a coffee link on his GitHub profile.</p></div>
+  </div>
+  <dl class="credits">
+    <div><dt>The model</dt>
+      <dd><b>Laya</b> is created by <a href="https://github.com/NandhaKishorM">Nandakishor M</a> of Convai Innovations. He designed it, trained it on a single GPU and released it under Apache-2.0:
+        <a href="https://github.com/NandhaKishorM/laya">code</a>, <a href="https://huggingface.co/convaiinnovations/laya">weights</a>,
+        <a href="https://huggingface.co/spaces/convaiinnovations/laya-demo">his own demo</a>,
+        <a href="https://dev.to/nandakishor_m_6cc0adfde9f/i-built-non-autoregressive-decision-models-a-year-ago-then-a-frontier-lab-called-it-a-18me">his write-up</a>.
+        In his words: “It can be run on low end PC as its a small 421M model.”</dd></div>
+    <div><dt>The research</dt>
+      <dd><a href="https://arxiv.org/abs/2503.23303">SalesRLAgent</a> (arXiv 2503.23303, March 2025), a reinforcement-learned model that outputs probabilities turn by turn, with its
+        <a href="https://huggingface.co/DeepMostInnovations/sales-conversion-model-reinf-learning">model</a> and
+        <a href="https://huggingface.co/datasets/DeepMostInnovations/saas-sales-conversations">dataset</a>. Then
+        <a href="https://arxiv.org/abs/2510.01237">confidence-aware routing</a> (arXiv 2510.01237, September 2025). Both are his.</dd></div>
+    <div><dt>This site</dt>
+      <dd>The playground, the two games, the Laya vs Jev benchmark and the <a href="./#skill">agent skill</a> are by brain function collapse. I did not train, design or fund the model, and I am not affiliated with Convai Innovations or TypeSafe AI.</dd></div>
+    <div><dt>Jev</dt>
+      <dd>Jev is TypeSafe AI’s product. It is named here only to compare.</dd></div>
+  </dl>
+</section>
+
+<section class="block prose">
+  <div class="head">
+    <h2>Who was first.</h2>
+  </div>
+  <ol class="timeline">
+    <li><time datetime="2025-03-30">30 Mar 2025</time><span>Nandakishor M publishes SalesRLAgent: reinforcement learning that outputs calibrated probabilities instead of text. Paper, model and dataset are open.</span></li>
+    <li><time datetime="2025-09-23">23 Sep 2025</time><span>His second paper: routing decisions by model confidence.</span></li>
+    <li><time datetime="2026-09">Sep 2026</time><span>TypeSafe AI launches Jev, a hosted System One model. Closed weights, early access, a waitlist.</span></li>
+    <li><time datetime="2026-09-18">18 Sep 2026</time><span>He releases Laya: the same idea made general. 421M parameters, open weights, runs on a laptop.</span></li>
+    <li><time datetime="2026-09-20">20 Sep 2026</time><span>This page, the benchmark and the agent skill.</span></li>
+  </ol>
+</section>
+
+<section class="block prose">
+  <div class="head">
+    <h2>brain function collapse.</h2>
+    <div class="aside">
+      <p class="big">I mostly draw rectangles and make them move. Occasionally I grind an algorithm, just to entertain myself. I’m a designer educated as an architect and programmer by heart.</p>
+      <p><a href="https://x.com/brainFnCl">X</a> · <a href="https://www.threads.com/@brainfncl">Threads</a> · <a href="https://www.linkedin.com/in/wojciech-dobry">LinkedIn</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="seam up"></div>
+<section class="band">
+  <h2>Your agent can add this today.</h2>
+  <div class="cta"><a class="btn solid" href="./#skill">Get the agent skill</a><a class="btn" href="./">See the demo</a></div>
+</section>
+<div class="seam"></div>
+
+<footer>
+  <div class="cols3">
+    <p><b>Laya</b> is created by <a href="https://github.com/NandhaKishorM">Nandakishor M</a> (Convai Innovations), Apache-2.0: <a href="https://github.com/NandhaKishorM/laya">code</a>, <a href="https://huggingface.co/convaiinnovations/laya">weights</a>, <a href="https://arxiv.org/abs/2503.23303">the original paper</a>, <a class="nw" href="https://arxiv.org/abs/2510.01237">the follow-up</a>.</p>
+    <p>This playground, the Laya vs Jev benchmark and the agent skill are by <a href="https://brainfunctioncollapse.com">brain function collapse</a>.&nbsp;<a data-repo-link href="#">Source</a>.</p>
+    <p>Not affiliated with or endorsed by TypeSafe AI. Jev is their product, named here only to&nbsp;compare.</p>
+  </div>
+</footer>
+<script type="module" src="static/nav.js"></script>
+</body>
+</html>

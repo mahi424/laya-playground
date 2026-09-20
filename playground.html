@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Pin relative URLs to this folder whether the page is served as /laya/playground or /laya/playground.html. -->
+<script>document.write('<base href="'+location.pathname.replace(/[^\/]*$/,'')+'">');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laya playground: typed questions, real probabilities</title>
+<meta name="description" content="Write some text and a few typed questions, and see Laya's answers with probabilities. Recorded output here; clone the repository to run it live on your machine.">
+<meta name="author" content="brain function collapse">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://brainfunctioncollapse.com/laya/playground">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="brainfunctioncollapse">
+<meta property="og:url" content="https://brainfunctioncollapse.com/laya/playground">
+<meta property="og:title" content="Laya playground: typed questions, real probabilities">
+<meta property="og:description" content="Write some text and a few typed questions, and see Laya's answers with probabilities.">
+<meta property="og:image" content="https://brainfunctioncollapse.com/laya/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body data-repo="https://github.com/wdobry/laya-playground">
+
+<div class="bar-top">
+  <a class="brand" href="https://brainfunctioncollapse.com"><img src="static/bfc-mark.png" alt="" width="128" height="128"><span>brain function collapse</span></a>
+  <nav>
+    <a href="./">Laya</a><a href="playground" aria-current="page">Playground</a><a href="about">About</a>
+  </nav>
+  <span class="tag" id="status"><i class="dot"></i>recorded preview</span>
+  <a class="btn solid" href="./#skill">Get the skill</a>
+</div>
+
+<section class="hero compact">
+  <div class="head">
+    <h1>Ask it something typed.</h1>
+    <p class="lede">Some text, a few typed questions, one forward pass. Pick a preset or write your own.</p>
+  </div>
+</section>
+<div class="seam"></div>
+
+<div class="legend">
+  <span><code>choice</code>picks one option, with a probability for each</span>
+  <span><code>score</code>places the text on an ordered rubric</span>
+  <span><code>noul</code>yes or no, returns P(true)</span>
+</div>
+
+<section class="block">
+  <p class="banner" id="pgBanner"></p>
+  <div class="pg" id="pg">
+    <div class="editor">
+      <label for="preset">Preset</label>
+      <select id="preset"></select>
+      <label for="state">State</label>
+      <textarea id="state" rows="7" spellcheck="false" placeholder="the text to decide about, or a JSON object"></textarea>
+      <div class="qhead">
+        <label>Questions</label><span class="sp"></span>
+        <div class="seg" role="group" aria-label="Question editor mode"><button id="modeForm" class="on">Form</button><button id="modeJson">JSON</button></div>
+      </div>
+      <div id="qlist"></div>
+      <textarea id="qjson" rows="18" spellcheck="false" hidden></textarea>
+      <button id="addQ">+ Add question</button>
+      <div class="actions">
+        <div><label for="model">Checkpoint</label>
+          <select id="model">
+            <option value="">auto-route</option><option value="english">english (421M)</option>
+            <option value="multilingual">multilingual (322M)</option><option value="typed-decisions">typed-decisions (421M)</option>
+          </select></div>
+        <div><label for="lang">Language hint, e.g. pl</label><input type="text" id="lang" maxlength="12" autocomplete="off"></div>
+      </div>
+      <div class="runbar"><button id="runBtn">Run</button><button id="compareBtn">Compare all 3</button><span class="sp"></span><span>⌘/Ctrl + Enter</span></div>
+    </div>
+    <div class="results" id="results" aria-live="polite">
+      <div class="card">
+        <p>Every question is answered in the same forward pass. No text is generated. Run a preset, or your own text, to see typed answers with&nbsp;probabilities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="cols3">
+    <p><b>Laya</b> is created by <a href="https://github.com/NandhaKishorM">Nandakishor M</a> (Convai Innovations), Apache-2.0: <a href="https://github.com/NandhaKishorM/laya">code</a>, <a href="https://huggingface.co/convaiinnovations/laya">weights</a>, <a href="https://arxiv.org/abs/2503.23303">the original paper</a>, <a class="nw" href="https://arxiv.org/abs/2510.01237">the follow-up</a>.</p>
+    <p>This playground, the Laya vs Jev benchmark and the agent skill are by <a href="https://brainfunctioncollapse.com">brain function collapse</a>.&nbsp;<a data-repo-link href="#">Source</a>.</p>
+    <p>Not affiliated with or endorsed by TypeSafe AI. Jev is their product, named here only to&nbsp;compare.</p>
+  </div>
+</footer>
+<script type="module" src="static/nav.js"></script>
+<script type="module" src="static/playground.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; background: #ffc609; color: #0c0c0c; overflow: hidden; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; position: relative; }
+  .mono { font: 20px/1.4 "SF Mono", Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .frame { position: absolute; inset: 44px 56px 170px; }
+  .frame i { position: absolute; width: 22px; height: 22px; border: 0 solid #0c0c0c; }
+  .frame i:nth-child(1) { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+  .frame i:nth-child(2) { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+  .frame i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+  .frame i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+  .top { position: absolute; top: 84px; left: 0; right: 0; text-align: center; }
+  h1 { position: absolute; top: 140px; left: 80px; right: 80px; margin: 0; text-align: center; font-weight: 500; font-size: 112px; line-height: .92; letter-spacing: -.055em; }
+  .dither { position: absolute; left: 0; right: 0; bottom: 84px; height: 56px; color: #0c0c0c;
+    background: repeating-conic-gradient(currentColor 0% 25%, transparent 0% 50%) 0 0 / 8px 8px; -webkit-mask-image: linear-gradient(to top, #000, transparent); }
+  .foot { position: absolute; left: 56px; right: 56px; bottom: 30px; display: flex; justify-content: space-between; font-size: 17px; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #0c0c0c; }
+  .foot { color: #ffc609; z-index: 2; }
+</style>
+<div class="frame"><i></i><i></i><i></i><i></i></div>
+<div class="top mono">Laya · The Open-Source Alternative To TypeSafe Jev</div>
+<h1>Decisions 200× faster than an LLM.</h1>
+<div class="dither"></div><div class="bar"></div>
+<div class="foot mono"><span>Demo · benchmark · agent skill by brain function collapse</span><span>brainfunctioncollapse.com/laya</span></div>
