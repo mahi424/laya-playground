@@ -14,7 +14,8 @@ async function renderShowcase() {
     h('div', {}, h('h3', {}, 'The questions, asked together'),
       h('ul', {}, Object.entries(data.questions).map(([id, q]) => h('li', {}, h('code', {}, id), ' ' + q.instructions)))),
     h('div', {}, h('h3', {}, 'The run'),
-      h('p', {}, `Real output, recorded ${data.recorded} on an ${data.machine}. Median of five runs, laya ${data.laya}. Each card below is one checkpoint answering all five questions in a single pass.`)));
+      h('p', {}, `Real output, recorded ${data.recorded} on an ${data.machine}. Median of five runs, laya ${data.laya}. Each card below is one checkpoint answering all five questions in a single pass. `,
+        h('a', { class: 'nw', href: './#run-it' }, 'Run it locally'), ' to ask your\u00a0own.')));
   $('#showcase').replaceChildren(...data.results.map(r => resultCard(r)));
 }
 

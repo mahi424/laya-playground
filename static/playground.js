@@ -95,6 +95,7 @@ function parseState() {
 }
 
 // ---------------------------------------------------------------- running
+// `note` is a string, or an array of strings and nodes when it carries a link.
 function show(cards, compare, note, quiet) {
   $('#pg').classList.toggle('compare', compare);
   $('#results').replaceChildren(...(note ? [h('p', { class: 'note' }, note)] : []), ...cards);
@@ -103,13 +104,15 @@ function show(cards, compare, note, quiet) {
 const showError = msg => show([], false, msg);
 
 // Without a ready model only the recorded presets can be answered; anything edited needs the real thing.
+// On the public site the note ends by pointing at it. While a local model loads it does not: that visitor is already there.
+const runLocally = () => [h('a', { class: 'nw', href: './#run-it' }, 'Run it locally'), ' to try your own\u00a0text.'];
 function showRecorded(base, compare, quiet) {
   const p = presets[$('#preset').value], same = p && JSON.stringify(base) === JSON.stringify({ state: p.state, questions: p.questions });
   if (!same || !p.run) return showError(health.connected ? 'That text has not been recorded, and the model is still loading. Try again in a moment.'
-    : 'That text has not been recorded, and there is no model behind this page. Run the repository locally to try your own text.');
+    : ['That text has not been recorded, and there is no model behind this page. ', ...runLocally()]);
   show(compare ? p.compare.map(r => resultCard(r)) : [resultCard(p.run, { ...base, model: p.model, lang: p.lang })], compare,
-    `Recorded output for this preset (${recorded}). ` + (health.connected ? 'The model is still loading; it will answer your own text once it is ready.'
-      : 'There is no model behind this page: to run your own text, run the repository locally.'), quiet);
+    [`Recorded output for this preset (${recorded}). `, ...(health.connected ? ['The model is still loading; it will answer your own text once it is ready.']
+      : ['There is no model behind this page. ', ...runLocally()])], quiet);
 }
 // The page opens in a working state: with no model ready, a preset shows its recorded answer as soon as it is picked.
 function autoShow() {

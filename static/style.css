@@ -60,26 +60,31 @@ p, li, dd, dt, h3, figcaption, .timeline span, .stats span { text-wrap: pretty; 
 .brand { display: flex; align-items: center; gap: 8px; font: 500 var(--fs-body)/1 var(--sans); text-decoration: none; white-space: nowrap; }
 .brand img { width: 1.35em; height: 1.35em; flex: none; image-rendering: -webkit-optimize-contrast; }
 .brand span { position: relative; top: -.125em; }   /* measured: puts the name on the same baseline as the mono links beside it */
-.bar-top nav { display: flex; align-items: center; gap: 0 20px; }
+.bar-top nav { display: flex; align-items: center; gap: 0 20px; margin-right: auto; }   /* the status and the two actions sit on the right */
 .bar-top nav a, .index a { padding: 10px 0; color: var(--dim); text-decoration: none; white-space: nowrap; }
 .bar-top nav a:hover, .bar-top nav a[aria-current], .index a:hover { color: var(--text); }
-.bar-top .tag { margin-left: auto; }
-.tag { display: inline-flex; align-items: center; gap: 7px; padding: 5px 8px; line-height: 1; border: 1px solid var(--line); color: var(--dim); white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 7px; padding: 5px 8px; line-height: 1; border: 1px solid var(--line); color: var(--dim); text-decoration: none; white-space: nowrap; }
+a.tag:hover { color: var(--text); }
 .tag.on { border-color: var(--amber); color: var(--amber); }
 .dot { width: 6px; height: 6px; background: var(--faint); display: inline-block; }
 .dot.on { background: var(--amber); }
 .dot.loading { background: var(--amber); animation: blink 1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: .2; } }
-/* phone: brand and the call to action on the first row, the three pages on the second */
+/* one row for as long as it fits: the status goes first, then the secondary action. The primary one always stays */
+@media (max-width: 1090px) { .bar-top .tag { display: none; } }
+@media (max-width: 900px) { .bar-top .btn:not(.solid) { display: none; } }
+/* phone: brand and the primary action on the first row, the three pages on the second */
 @media (max-width: 720px) {
   .bar-top { position: static; gap: 0; }
-  .bar-top .tag { display: none; }
   .bar-top .btn { margin-left: auto; }
   .bar-top .brand, .bar-top .btn { margin-top: 8px; margin-bottom: 8px; }
   .bar-top nav { order: 3; flex-basis: calc(100% + 2 * var(--gut)); margin: 0 calc(-1 * var(--gut)); padding: 0 var(--gut); gap: 0 24px; border-top: 1px solid var(--line); }
   .bar-top nav a { padding: 15px 0; }
   html { scroll-padding-top: 8px; }
 }
+/* the smallest phones: a tighter button, then no mark, so the name and the action still share the first row */
+@media (max-width: 380px) { .bar-top .btn { padding-inline: var(--s1); } }
+@media (max-width: 368px) { .brand img { display: none; } }
 /* the landing page's own index: the section anchors that used to crowd the top bar */
 .index { display: flex; align-items: center; gap: 0 28px; min-height: 52px; padding: 0 var(--gut); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
 .index::-webkit-scrollbar { display: none; }
@@ -120,6 +125,7 @@ p, li, dd, dt, h3, figcaption, .timeline span, .stats span { text-wrap: pretty; 
   .hero .cta .btn:first-child { grid-column: 1 / -1; }
   .hero .btn, .band .btn, .bar-top .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
 }
+@media (max-width: 480px) { .hero .cta { grid-template-columns: minmax(0, 1fr); } }   /* a phone: no label breaks inside its button */
 /* where amber meets ink: a three-step dither, 24px tall. `.up` runs from ink into amber */
 .seam { position: relative; height: 24px; color: var(--amber); background: var(--dither-50), var(--ink); }
 .seam::before, .seam::after { content: ""; position: absolute; left: 0; right: 0; height: 8px; }
@@ -137,8 +143,8 @@ section.block.first, .index + section.block, .seam + section.block, .legend + se
 .qa > div { border-left: 1px solid var(--rule); padding-left: 14px; }
 .qa h3 { margin: 0 0 var(--s1); font-size: inherit; font-weight: 500; }
 .qa p { margin: 0; max-width: 54ch; color: var(--dim); }
-.qa a, .prose a { color: var(--text); }
-.qa a:hover, .prose a:hover { color: var(--amber); }
+.qa a, .prose a, .banner a, .showcase-input a { color: var(--text); }
+.qa a:hover, .prose a:hover, .banner a:hover, .showcase-input a:hover { color: var(--amber); }
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: var(--s2) 0 0; }
 @media (max-width: 800px) { .qa { grid-template-columns: minmax(0, 1fr); } }
 
@@ -188,9 +194,11 @@ label { display: block; margin: 18px 0 6px; color: var(--faint); }
 /* what you are watching: a recording or the live model */
 .banner { max-width: 90ch; margin: 0 0 var(--s2); color: var(--dim); }
 .stage .banner { position: absolute; right: 12px; bottom: 12px; max-width: min(calc(100% - 24px), 46ch); margin: 0; padding: 6px 10px; background: var(--ink); text-align: right; pointer-events: none; }
+.stage .banner a { pointer-events: auto; }   /* the plate lets clicks through to the game; its link takes them */
 .banner.live { color: var(--amber); }
 .banner:empty { display: none; }
 .note { margin: 0; padding: 10px 12px; background: var(--amber); color: var(--ink); }
+.note a:hover { background: var(--ink); color: var(--amber); }   /* an ink link on amber: hover swaps the two, as the buttons do */
 
 /* ------------------------------------------------------------------ game stage (8 columns) + decision feed (4 columns) */
 .live { align-items: start; row-gap: var(--s3); }
