@@ -1,24 +1,22 @@
 <!doctype html><meta charset="utf-8">
+<!-- The social card, 1200 x 630, in the site's own system: left-aligned amber page head, the three-step dither seam, an ink foot.
+     Render it with headless Chrome (it does not exit by itself, so kill it once og.png exists):
+       chrome --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --screenshot=og.png tools/og.html -->
 <style>
   html, body { margin: 0; width: 1200px; height: 630px; background: #ffc609; color: #0c0c0c; overflow: hidden; }
-  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; position: relative; }
-  .mono { font: 20px/1.4 "SF Mono", Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
-  .frame { position: absolute; inset: 44px 56px 170px; }
-  .frame i { position: absolute; width: 22px; height: 22px; border: 0 solid #0c0c0c; }
-  .frame i:nth-child(1) { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
-  .frame i:nth-child(2) { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
-  .frame i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
-  .frame i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
-  .top { position: absolute; top: 84px; left: 0; right: 0; text-align: center; }
-  h1 { position: absolute; top: 140px; left: 80px; right: 80px; margin: 0; text-align: center; font-weight: 500; font-size: 112px; line-height: .92; letter-spacing: -.055em; }
-  .dither { position: absolute; left: 0; right: 0; bottom: 84px; height: 56px; color: #0c0c0c;
-    background: repeating-conic-gradient(currentColor 0% 25%, transparent 0% 50%) 0 0 / 8px 8px; -webkit-mask-image: linear-gradient(to top, #000, transparent); }
-  .foot { position: absolute; left: 56px; right: 56px; bottom: 30px; display: flex; justify-content: space-between; font-size: 17px; }
-  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #0c0c0c; }
-  .foot { color: #ffc609; z-index: 2; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; position: relative; -webkit-font-smoothing: antialiased; }
+  h1 { position: absolute; top: 60px; left: 60px; right: 60px; margin: 0; font-weight: 500; font-size: 124px; line-height: .9; letter-spacing: -.055em; }
+  p { position: absolute; top: 318px; left: 60px; width: 760px; margin: 0; font-weight: 500; font-size: 31px; line-height: 1.28; letter-spacing: -.02em; text-wrap: pretty; }
+  /* where amber meets ink: 75, 50 and 25 percent amber, on an 8px tile so it survives the downscaling social sites apply */
+  .seam { position: absolute; left: 0; right: 0; bottom: 84px; height: 48px; }
+  .seam i { display: block; height: 16px; }
+  .seam i:nth-child(1) { background: conic-gradient(#0c0c0c 25%, transparent 0) 0 0 / 8px 8px, #ffc609; }
+  .seam i:nth-child(2) { background: repeating-conic-gradient(#ffc609 0% 25%, transparent 0% 50%) 0 0 / 8px 8px, #0c0c0c; }
+  .seam i:nth-child(3) { background: conic-gradient(#ffc609 25%, transparent 0) 0 0 / 8px 8px, #0c0c0c; }
+  .foot { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; padding: 0 60px; display: flex; align-items: center; justify-content: space-between;
+    background: #0c0c0c; color: #ffc609; font: 17px/1 "SF Mono", Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
 </style>
-<div class="frame"><i></i><i></i><i></i><i></i></div>
-<div class="top mono">Laya · The Open-Source Alternative To TypeSafe Jev</div>
-<h1>Decisions 200× faster than an LLM.</h1>
-<div class="dither"></div><div class="bar"></div>
-<div class="foot mono"><span>Demo · benchmark · agent skill by brain function collapse</span><span>brainfunctioncollapse.com/laya</span></div>
+<h1>Decisions 200×<br>faster than an LLM.</h1>
+<p>Laya is the open-source alternative to TypeSafe Jev. Typed answers with real probabilities, on your own&nbsp;machine.</p>
+<div class="seam"><i></i><i></i><i></i></div>
+<div class="foot"><span>Demo · benchmark · agent skill by brain function collapse</span><span>brainfunctioncollapse.com/laya</span></div>
