@@ -9,6 +9,7 @@ import { Stage } from './dither.js';
 import { STEP, MAX_RATE, answersFrom } from './sim.js';
 import { h, bar, predict } from './ui.js';
 
+const ROWS = ['state', 'action', 'timing'];   // the feed rows whose text, and so whose height, changes while a game runs
 const TOUCH_ONLY = matchMedia('(hover: none) and (pointer: coarse)').matches;   // a phone or tablet with no keyboard
 
 const TONES = ['#0c0c0c', '#ffc609'];
@@ -19,7 +20,7 @@ let health = window.layaHealth ?? null;   // null: unknown, false: no server, ob
 
 class GameStage {
   constructor(mount, demo) {
-    Object.assign(this, { demo, pilot: 'laya', paused: reducedMotion, ratio: 0, mode: null, run: undefined, epoch: 0, acc: 0, feedDirty: true });
+    Object.assign(this, { demo, pilot: 'laya', paused: reducedMotion, ratio: 0, mode: null, run: undefined, epoch: 0, acc: 0, feedDirty: true, rowMin: {} });
     this.params = Object.fromEntries(demo.params.map(p => [p.id, p.value]));
     this.build(mount);
     this.stage = new Stage(this.el.canvas, { w: 768, h: 432, tones: TONES });
@@ -149,6 +150,9 @@ class GameStage {
     el.bars.replaceChildren(...Object.entries(a.probabilities).map(([k, p]) => bar(k, p, k === a.choice)));
     el.action.replaceChildren(h('b', {}, action.label), h('span', { class: 'why' }, action.why));
     el.timing.textContent = `${this.lat.model.toFixed(1)} ms per decision · ${this.stamps.length} decisions a second · ${this.count} so far`;
+    // These rows change on every decision. One may grow to fit a longer sentence, but it never shrinks back:
+    // otherwise everything under it jumps thirty times a second.
+    for (const k of ROWS) { const tall = el[k].offsetHeight; if (tall > (this.rowMin[k] || 0)) el[k].style.minHeight = (this.rowMin[k] = tall) + 'px'; }
   }
 }
 
@@ -176,7 +180,9 @@ function loop(now) {
 
 addEventListener('laya:health', e => { health = e.detail; });
 addEventListener('resize', () => stages.forEach(s => {   // phones fire resize whenever the URL bar moves
-  const w = s.el.canvas.clientWidth; if (w !== s.width) { s.width = w; s.stage.layout(); s.drawn = false; }
+  const w = s.el.canvas.clientWidth; if (w === s.width) return;
+  s.width = w; s.stage.layout(); s.drawn = false;
+  s.rowMin = {}; for (const k of ROWS) s.el[k].style.minHeight = ''; s.feedDirty = true;   // the text wraps differently now: measure the rows again
 }));
 for (const mount of document.querySelectorAll('.game-mount')) {
   const demo = demos.find(d => d.id === mount.dataset.demo);

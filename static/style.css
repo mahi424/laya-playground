@@ -222,6 +222,8 @@ dl.feed { margin: 0; border-left: 1px solid var(--rule); padding-left: 14px; }
 dl.feed dt { color: var(--faint); margin-top: var(--s2); }
 dl.feed dt:first-child { margin-top: 0; }
 dl.feed dd { margin: 2px 0 0; word-break: break-word; min-height: 1.6em; }
+/* the sentence changes on every decision: hold two lines so the rows under it stay put (live.js ratchets anything longer) */
+[data-demo="runner"] dl.feed dd:nth-of-type(2), [data-demo="tetris"] dl.feed dd:nth-of-type(2) { min-height: 3.2em; }
 dl.feed dd b { display: inline-block; background: var(--amber); color: var(--ink); padding: 0 8px; margin-right: 10px; }
 dl.feed .why, dl.feed dd:first-of-type, dl.feed dd:last-child { color: var(--dim); }
 
