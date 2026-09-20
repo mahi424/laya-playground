@@ -195,7 +195,7 @@ label { display: block; margin: 18px 0 6px; color: var(--faint); }
 .banner { max-width: 90ch; margin: 0 0 var(--s2); color: var(--dim); }
 .stage .banner { position: absolute; right: 12px; bottom: 12px; max-width: min(calc(100% - 24px), 46ch); margin: 0; padding: 6px 10px; background: var(--ink); text-align: right; pointer-events: none; }
 .stage .banner a { pointer-events: auto; }   /* the plate lets clicks through to the game; its link takes them */
-.banner.live { color: var(--amber); }
+.banner.live { display: block; color: var(--amber); }   /* `.live` is also the game grid: without this the live banner becomes 12 columns */
 .banner:empty { display: none; }
 .note { margin: 0; padding: 10px 12px; background: var(--amber); color: var(--ink); }
 .note a:hover { background: var(--ink); color: var(--amber); }   /* an ink link on amber: hover swaps the two, as the buttons do */
@@ -287,7 +287,7 @@ details pre { overflow: auto; max-height: 340px; margin: 8px 0 0; color: var(--d
 .uc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4) var(--gap); }
 @media (max-width: 1100px) { .uc { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .uc { grid-template-columns: minmax(0, 1fr); } }
-.uc-viz { position: relative; margin-bottom: var(--s2); background: var(--ink); border: 1px solid var(--line); }
+.uc-viz { position: relative; margin-bottom: var(--s2); background: var(--ink); border: 1px solid var(--line); overflow: hidden; }   /* a long diagram label must not widen the page on a phone */
 .uc-viz canvas { display: block; width: 100%; aspect-ratio: 420 / 262; }
 .uc-viz span { position: absolute; color: var(--text); white-space: nowrap; pointer-events: none; }
 .uc h3 { margin: 0 0 var(--s1); font-weight: 500; }

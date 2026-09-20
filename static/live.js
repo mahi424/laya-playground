@@ -137,7 +137,7 @@ class GameStage {
     const { el, run } = this;
     el.source.textContent = this.mode === 'live' ? `live model · ${this.demo.checkpoint} checkpoint`
       : this.mode === 'you' ? 'you are playing · the model is idle'
-      : run ? `recorded run · ${run.machine} · ${run.recorded}` : '—';
+      : run ? `recorded run · ${run.machine} ·\u00a0${run.recorded}` : '—';
     if (!this.feed) { for (const k of ['state', 'question', 'action', 'timing']) el[k].textContent = '—'; return el.bars.replaceChildren(); }
     const { obs, answers, action } = this.feed, [qid, q] = Object.entries(obs.questions)[0], a = answers[qid];
     el.state.textContent = typeof obs.state === 'string' ? obs.state : JSON.stringify(obs.state);
