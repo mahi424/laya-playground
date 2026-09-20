@@ -148,9 +148,9 @@ class GameStage {
 const typing = e => /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName);
 addEventListener('keydown', e => {
   const s = stages.find(s => s.active);
-  if (!s || s.pilot !== 'you' || typing(e) || !['Space', 'ArrowLeft', 'ArrowRight', 'ArrowUp'].includes(e.code)) return;
+  if (!s || s.pilot !== 'you' || typing(e) || !['Space', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.code)) return;
   e.preventDefault();
-  if (!keys.has(e.code)) pressed.add(e.code === 'ArrowUp' ? 'Space' : e.code);
+  if (!keys.has(e.code)) pressed.add(e.code === 'ArrowUp' ? 'Space' : e.code).add(e.code);   // up doubles as space (flap); Tetris tells them apart
   keys.add(e.code);
 });
 addEventListener('keyup', e => keys.delete(e.code));

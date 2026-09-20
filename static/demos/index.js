@@ -15,5 +15,6 @@
 // Write the state in words and ask what the model SEES, not what to do. See the Notes section.
 import flappy from './flappy.js';
 import runner from './runner.js';
+import tetris from './tetris.js';
 
-export default [flappy, runner];
+export default [flappy, runner, tetris];

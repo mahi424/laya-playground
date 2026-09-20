@@ -2,6 +2,7 @@
 //
 //     node tools/record_run.mjs                 # needs `python server.py` running
 //     SECONDS=90 SEED=7 node tools/record_run.mjs
+//     ONLY=tetris node tools/record_run.mjs     # one demo; the other recordings stay as they are
 //
 // Each game is simulated headlessly at the browser's fixed timestep. Every decision is a real
 // call to the local model; the simulation advances by the measured round-trip time before the
@@ -25,6 +26,7 @@ const health = await (await fetch(API + '/api/health')).json();
 mkdirSync(OUT, { recursive: true });
 
 for (const demo of demos) {
+  if (process.env.ONLY && !process.env.ONLY.split(',').includes(demo.id)) continue;   // ONLY=tetris leaves the other recordings alone
   if (health.models[demo.checkpoint] !== 'ready') throw new Error(`${demo.checkpoint} checkpoint is not loaded yet`);
   const inst = demo.create(SEED), params = Object.fromEntries(demo.params.map(p => [p.id, p.value]));
   const total = Math.round(SECONDS / STEP), decisions = [];
