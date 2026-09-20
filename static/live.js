@@ -120,12 +120,16 @@ class GameStage {
   }
 
   // What is on screen: a recording on the public site, a recording while local checkpoints load, or the live model.
+  // Only the public recording points at running it locally; everyone else already is.
   renderBanner() {
     const local = health !== false && health !== null, text = this.mode === 'live' ? 'Live. The model on this machine is playing.'
       : this.mode === 'you' ? 'You are playing. Same physics, no model.'
       : local ? 'Recorded run. The model is loading and will take over shortly.'
-      : 'Recorded run, not the live model: real decisions, replayed. Run this repository locally to see it play live.';
-    if (this.el.banner.textContent !== text) { this.el.banner.textContent = text; this.el.banner.classList.toggle('live', this.mode === 'live'); }
+      : 'Recorded run: real decisions, replayed.';
+    if (this.bannerText === text) return;
+    this.bannerText = text;
+    this.el.banner.replaceChildren(text, ...(this.mode === 'replay' && !local ? [' ', h('a', { class: 'nw', href: './#run-it' }, 'Run it locally'), ' to watch it play\u00a0live.'] : []));
+    this.el.banner.classList.toggle('live', this.mode === 'live');
   }
 
   renderFeed() {

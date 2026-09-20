@@ -180,8 +180,9 @@
   <nav>
     <a href="./" aria-current="page">Laya</a><a href="playground">Playground</a><a href="about">About</a>
   </nav>
-  <span class="tag" id="status"><i class="dot"></i>recorded preview</span>
-  <a class="btn solid" href="./#skill">Get the skill</a>
+  <a class="tag" id="status" href="./#run-it"><i class="dot"></i>recorded preview</a>
+  <a class="btn" href="./#skill">Get the skill</a>
+  <a class="btn solid" href="./#run-it">Run it locally</a>
 </div>
 
 <section class="hero">
@@ -190,8 +191,8 @@
     <div class="hero-main">
       <p class="lede">Laya is the open-source alternative to TypeSafe Jev: a small model that decides instead of chatting. Typed answers with real probabilities in 21 ms, on your own machine.</p>
       <div class="cta">
-        <a class="btn solid" href="./#skill">Get the agent skill</a>
-        <a class="btn" data-repo-link href="#">Get the code</a>
+        <a class="btn solid" href="./#run-it">Run it locally</a>
+        <a class="btn" href="./#skill">Get the agent skill</a>
         <a class="btn" href="./#flappy">Watch it play</a>
       </div>
     </div>
@@ -336,17 +337,18 @@
     <h2>Clone it. Run it.<br>Keep it.</h2>
     <div class="aside"><p class="lead">The model server, both games, the benchmark and the recorder, in one repository. Apple silicon, NVIDIA or plain CPU.</p></div>
   </div>
-  <pre class="cmd" data-repo-text>git clone {repo}
+  <pre class="cmd" id="runCmd" data-repo-text>git clone {repo}
 cd {dir}
 uv venv --python 3.12 &amp;&amp; uv pip install laya
 .venv/bin/python server.py          # then open http://127.0.0.1:8770/playground</pre>
+  <p class="row"><a class="btn solid" data-repo-link href="#">Get the code</a><button data-copy="#runCmd">Copy commands</button></p>
   <p class="fine">The first start downloads 2.3 GB of open weights and takes about 90 seconds to load them.</p>
 </section>
 
 <div class="seam up"></div>
 <section class="band">
-  <h2>Your agent can add this today.</h2>
-  <div class="cta"><a class="btn solid" href="./#skill">Get the agent skill</a><a class="btn" href="about">Why this page exists</a></div>
+  <h2>Run it on your own machine.</h2>
+  <div class="cta"><a class="btn solid" href="./#run-it">Run it locally</a><a class="btn" href="./#skill">Get the agent skill</a><a class="btn" href="about">Why this page exists</a></div>
 </section>
 <div class="seam"></div>
 
